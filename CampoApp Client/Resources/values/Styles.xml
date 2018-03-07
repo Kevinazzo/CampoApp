@@ -1,7 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<style name="CampoTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+	<style name="CampoTheme" parent="@style/Theme.AppCompat.Light">
 		<item name="windowNoTitle">true</item>
 		<item name="windowActionBar">false</item>
+		<item name="android:colorPrimary">#d5d3c1</item>
+		<item name="android:colorPrimaryDark">#a4a291</item>		
+		<item name="android:colorAccent">#000000</item>-->
 	</style>
+	<!--<style name="toolbarTheme" parent="Widget.AppCompat.Toolbar">
+			<item name="android:background">#d5d3c1</item>
+			<item name="theme">@android:style/ThemeOverlay.Material.ActionBar</item>
+	</style>-->
 </resources>

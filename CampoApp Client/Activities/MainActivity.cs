@@ -8,6 +8,7 @@ using Android.Support.V4.App;
 using Android.Support.V4.Widget;
 using Android.Support.Design.Widget;
 using Android.Support.V7.App;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace CampoApp
 {
@@ -24,12 +25,21 @@ namespace CampoApp
 			SetContentView(Resource.Layout.Main);
 
 
-			var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.idtoolbar);
+
+
+			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
 			SetSupportActionBar(toolbar);
-
-			SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
+			SupportActionBar.Title = "CampoApp-Potrero chico";
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+			SupportActionBar.SetHomeButtonEnabled(true);
+			SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
 
+
+			//var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
+			//ActionBar(toolbar);
+			//ActionBar.Title = "My Toolbar";
+			//ActionBar.SetHomeButtonEnabled(true);
+			//ActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
 
 
 			drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
@@ -37,11 +47,29 @@ namespace CampoApp
 
 
 			navigationView.NavigationItemSelected += (sender, e) => {
+				switch (e.MenuItem.ItemId)
+				{
+					case Resource.Id.nav_campSites:
+						
+						break;
+					case Resource.Id.nav_climbSites:
+						break;
+					default:
+						break;
+				}
 				e.MenuItem.SetChecked(true);
 				//react to click here and swap fragments or navigate
+
+
 				drawerLayout.CloseDrawers();
 			};
 		}
+
+		//public override bool OnCreateOptionsMenu(IMenu menu)
+		//{
+		//	MenuInflater.Inflate(Resource.Menu.nav_menu, menu);
+		//	return base.OnCreateOptionsMenu(menu);
+		//}
 		public override bool OnOptionsItemSelected(IMenuItem item)
 		{
 			switch (item.ItemId)
@@ -51,6 +79,11 @@ namespace CampoApp
 					return true;
 			}
 			return base.OnOptionsItemSelected(item);
+		}
+		
+		public void changeColorScheme(string color)
+		{
+			var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
 		}
 	}
 }
