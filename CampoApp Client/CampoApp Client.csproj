@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\Fragments\frg_climbingSites.cs" />
+    <Compile Include="Activities\Fragments\frg_restaurants.cs" />
     <Compile Include="Activities\Fragments\sitesAdapter.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\Fragments\frg_campingSites.cs" />
@@ -95,6 +96,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\campingsitesfragmentlistviewelement.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\climbingsites_fragment.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\climbingsitesfragmentlistviewelement.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

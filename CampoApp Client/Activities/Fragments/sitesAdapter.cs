@@ -36,34 +36,90 @@ namespace CampoApp
 
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
-			var row = context.LayoutInflater.Inflate(Resource.Layout.campingsitesfragmentlistviewelement, parent,false);
-			ImageView img = row.FindViewById<ImageView>(Resource.Id.campingsitelistviewElement_img);
-			TextView title = row.FindViewById<TextView>(Resource.Id.campingsiteListViewElement_Title);
-			TextView address = row.FindViewById<TextView>(Resource.Id.campingSiteListViewElement_Address);
-			ImageButton btn = row.FindViewById<ImageButton>(Resource.Id.campingSiteListViewElement_imgBtn);
-			LinearLayout textcontainer = row.FindViewById<LinearLayout>(Resource.Id.campingsitesListViewelement_textContainer);
-
-			img.LayoutParameters.Width = MainActivity.DevicePxWidth/5;
-			img.LayoutParameters.Height = img.LayoutParameters.Width;
-			img.SetScaleType(ImageView.ScaleType.FitCenter);
-
-			textcontainer.LayoutParameters.Width = (MainActivity.DevicePxWidth / 5) * 3;
-
-			btn.LayoutParameters.Height = img.LayoutParameters.Width;
-			btn.LayoutParameters.Width = img.LayoutParameters.Width;
-			btn.SetScaleType(ImageView.ScaleType.FitCenter);
-
-			img.SetImageResource(Resource.Drawable.restaurant);
-			title.Text = list[position].nombre;
-			address.Text = list[position].direccion;
-			btn.SetImageResource(Resource.Drawable.mapmarker);
-
-			btn.Click += delegate
+			View row = null;
+			if (list[position].tagset.Contains("restaurante")) //opciones para los restaurantes
 			{
-				var geoUri = Android.Net.Uri.Parse("geo:" + list[position].coordenadas+"?z=20");
-				var mapIntent = new Intent(Intent.ActionView, geoUri);
-				context.StartActivity(mapIntent);
-			};
+				row = context.LayoutInflater.Inflate(Resource.Layout.campingsitesfragmentlistviewelement, parent, false);
+
+				ImageView img = row.FindViewById<ImageView>(Resource.Id.campingsitelistviewElement_img);
+				TextView title = row.FindViewById<TextView>(Resource.Id.campingsiteListViewElement_Title);
+				TextView address = row.FindViewById<TextView>(Resource.Id.campingSiteListViewElement_Address);
+				ImageButton btn = row.FindViewById<ImageButton>(Resource.Id.campingSiteListViewElement_imgBtn);
+				LinearLayout textcontainer = row.FindViewById<LinearLayout>(Resource.Id.campingsitesListViewelement_textContainer);
+
+				img.SetImageResource(Resource.Drawable.restaurantMarker);
+				title.Text = list[position].nombre;
+				address.Text = list[position].direccion;
+				btn.SetImageResource(Resource.Drawable.mapmarker);
+				img.LayoutParameters.Width = MainActivity.DevicePxWidth / 5;
+				img.LayoutParameters.Height = img.LayoutParameters.Width;
+				img.SetScaleType(ImageView.ScaleType.FitCenter);
+
+				textcontainer.LayoutParameters.Width = (MainActivity.DevicePxWidth / 5) * 3;
+
+				btn.LayoutParameters.Height = img.LayoutParameters.Width;
+				btn.LayoutParameters.Width = img.LayoutParameters.Width;
+				btn.SetScaleType(ImageView.ScaleType.FitCenter);
+
+				btn.Click += delegate
+				{
+					var geoUri = Android.Net.Uri.Parse("geo:" + list[position].coordenadas + "?z=20");
+					var mapIntent = new Intent(Intent.ActionView, geoUri);
+					context.StartActivity(mapIntent);
+				};
+			}
+			else if(list[position].desc!=null && list[position].desc!="")// opciones para los sitios de senderismo
+			{
+
+				row = context.LayoutInflater.Inflate(Resource.Layout.climbingsitesfragmentlistviewelement, parent, false);
+				TextView name = row.FindViewById<TextView>(Resource.Id.climbingsiteListViewElement_Title);
+				TextView description = row.FindViewById<TextView>(Resource.Id.climbingSiteListViewElement_Address);
+				Button btn = row.FindViewById<Button>(Resource.Id.climbingSiteListViewElement_Btn);
+				LinearLayout  txtcontainer= row.FindViewById<LinearLayout>(Resource.Id.climbingsitesListViewelement_textContainer);
+
+				name.Text = list[position].nombre;
+				description.Text = list[position].desc;
+				//name.LayoutParameters.Width = (MainActivity.DevicePxWidth / 6) * 4;
+				//description.LayoutParameters.Width = name.LayoutParameters.Width;
+				txtcontainer.LayoutParameters.Width=(MainActivity.DevicePxWidth/6)*4;
+
+				btn.Click += delegate
+				{
+					var httpUri = Android.Net.Uri.Parse(list[position].web);
+					var mapIntent = new Intent(Intent.ActionView, httpUri);
+					context.StartActivity(mapIntent);
+				};
+			}else if (list[position].tagset.Contains("acampar")) //opciones para los sitiops de acampas
+			{
+				row = context.LayoutInflater.Inflate(Resource.Layout.campingsitesfragmentlistviewelement, parent, false);
+
+				ImageView img = row.FindViewById<ImageView>(Resource.Id.campingsitelistviewElement_img);
+				TextView title = row.FindViewById<TextView>(Resource.Id.campingsiteListViewElement_Title);
+				TextView address = row.FindViewById<TextView>(Resource.Id.campingSiteListViewElement_Address);
+				ImageButton btn = row.FindViewById<ImageButton>(Resource.Id.campingSiteListViewElement_imgBtn);
+				LinearLayout textcontainer = row.FindViewById<LinearLayout>(Resource.Id.campingsitesListViewelement_textContainer);
+
+				img.SetImageResource(Resource.Drawable.restaurantMarker);
+				title.Text = list[position].nombre;
+				address.Text = list[position].direccion;
+				btn.SetImageResource(Resource.Drawable.mapmarker);
+				img.LayoutParameters.Width = MainActivity.DevicePxWidth / 5;
+				img.LayoutParameters.Height = img.LayoutParameters.Width;
+				img.SetScaleType(ImageView.ScaleType.FitCenter);
+
+				textcontainer.LayoutParameters.Width = (MainActivity.DevicePxWidth / 5) * 3;
+
+				btn.LayoutParameters.Height = img.LayoutParameters.Width;
+				btn.LayoutParameters.Width = img.LayoutParameters.Width;
+				btn.SetScaleType(ImageView.ScaleType.FitCenter);
+
+				btn.Click += delegate
+				{
+					var geoUri = Android.Net.Uri.Parse("geo:" + list[position].coordenadas + "?z=20");
+					var mapIntent = new Intent(Intent.ActionView, geoUri);
+					context.StartActivity(mapIntent);
+				};
+			}
 			return row;
 		}
 	}

@@ -13,7 +13,7 @@ using Android.Widget;
 
 namespace CampoApp
 {
-	public class frg_campingSites : Fragment
+	public class frg_restaurants : Fragment
 	{
 		ListView listview;
 		public override void OnCreate(Bundle savedInstanceState)
@@ -33,14 +33,15 @@ namespace CampoApp
 		public override void OnStart()
 		{
 			base.OnStart();
-			sitesAdapter sitesAdapter = new sitesAdapter(Activity, fillnewCampingSitelist());
+			sitesAdapter sitesAdapter = new sitesAdapter(Activity, fillnewRestaurantSitelist());
 			listview = View.FindViewById<ListView>(Resource.Id.campingsites_listview);
 			listview.Adapter = sitesAdapter;
+
 		}
-		List<sitemodel>fillnewCampingSitelist()
+		List<sitemodel> fillnewRestaurantSitelist()
 		{
 			List<sitemodel> list = new List<sitemodel>();
-			list.Add(new sitemodel("La Posada", "Antiguo Camino a Potrero Chico 825, Las Pedreras, 65600 Hidalgo, N.L.", "25.956590, -100.475669", new string[] { "acampar" }));
+			list.Add(new sitemodel("Checo's Restaurante", "Antiguo camino a potrero chico #333", "25.957405, -100.476183", new string[] { "restaurante" }));
 			return list;
 		}
 	}

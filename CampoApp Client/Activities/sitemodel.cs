@@ -21,9 +21,18 @@ namespace CampoApp
 			coordenadas = coor;
 			tagset = tags;
 		}
+		public sitemodel(string nom, string _desc, string _web)
+		{
+			nombre = nom;
+			desc = _desc;
+			web = _web;
+		}
 		public string nombre { get; set; }
 		public string direccion { get; set; }
 		public string coordenadas { get; set; }
-		public string[] tagset { get; set; }
+		public string web { get; set; }
+		public string desc { get; set; }
+		public string[] tagset = new string[] { "" };
+
 	}
 }

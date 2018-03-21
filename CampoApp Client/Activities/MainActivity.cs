@@ -46,25 +46,31 @@ namespace CampoApp
 			SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
 
 			//control de acciones del menu, swapear entre fragments
-			navigationView.NavigationItemSelected += (sender, e) => {
+			navigationView.NavigationItemSelected += (sender, e) =>
+			{
 				Android.App.Fragment fragment = null;
 
 				switch (e.MenuItem.ItemId)
 				{
 					case Resource.Id.nav_campSites:
-						break;
-					case Resource.Id.nav_climbSites:
-						break;
-					case Resource.Id.nav_Restaurants:
 						fragment = new frg_campingSites();
 						break;
+					case Resource.Id.nav_climbSites:
+						fragment = new frg_climbingSites();
+						break;
+					case Resource.Id.nav_Restaurants:
+						fragment = new frg_restaurants();
+						break;
 					default:
+						Toast.MakeText(this, "No hay aplicacion de uber", ToastLength.Short).Show();
 						break;
 				}
 				e.MenuItem.SetChecked(true);
 				//react to click here and swap fragments or navigate
-				FragmentManager.BeginTransaction().Replace(Resource.Id.fragment_container, fragment)
-				.Commit();
+				if (fragment != null)
+				{
+					FragmentManager.BeginTransaction().Replace(Resource.Id.fragment_container, fragment).Commit();
+				}
 				drawerLayout.CloseDrawers();
 			};
 		}
