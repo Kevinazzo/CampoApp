@@ -13,7 +13,7 @@
 
 		<item
 		  android:id="@+id/nav_climbSites"
-		  android:title="Lugares para escalar" />
+		  android:title="Rutas para escalar" />
 		<!--android:icon="@drawable/ic_forum"-->
 
 		<item 

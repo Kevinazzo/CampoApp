@@ -12,13 +12,14 @@ using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace CampoApp
 {
-	[Activity(Label = "CampoApp", MainLauncher = true, Theme = "@style/CampoTheme")]
+	[Activity(Label = "CampApp", MainLauncher = true, Theme = "@style/CampoTheme")]
 	public partial class MainActivity : AppCompatActivity
 	{
 
 		private DrawerLayout drawerLayout;
 		private NavigationView navigationView;
-		private readonly ListView campingSitesfragmentListView;
+		private ImageView logo_container;
+		//private readonly ListView campingSitesfragmentListView;
 		public static Android.Util.DisplayMetrics metrics;
 		public static int DeviceDpHeight { get; set; }
 		public static int DeviceDpWidth { get; set; }
@@ -40,10 +41,15 @@ namespace CampoApp
 
 			var customtoolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
 			SetSupportActionBar(customtoolbar);
-			SupportActionBar.Title = "CampoApp-Potrero chico";
+			SupportActionBar.Title = "CampApp";
 			SupportActionBar.SetDisplayHomeAsUpEnabled(true);
 			SupportActionBar.SetHomeButtonEnabled(true);
 			SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.ic_menu_white_24dp);
+
+			logo_container = FindViewById<ImageView>(Resource.Id.logo_container);
+			logo_container.SetImageResource(Resource.Drawable.LogoCampAppAgenciaDave);
+
+
 
 			//control de acciones del menu, swapear entre fragments
 			navigationView.NavigationItemSelected += (sender, e) =>
@@ -53,12 +59,15 @@ namespace CampoApp
 				switch (e.MenuItem.ItemId)
 				{
 					case Resource.Id.nav_campSites:
+						SupportActionBar.Title = "CampApp - Sitios de Acampar";
 						fragment = new frg_campingSites();
 						break;
 					case Resource.Id.nav_climbSites:
+						SupportActionBar.Title = "CampApp - Rutas de escalada";
 						fragment = new frg_climbingSites();
 						break;
 					case Resource.Id.nav_Restaurants:
+						SupportActionBar.Title = "CampApp - Restaurantes";
 						fragment = new frg_restaurants();
 						break;
 					default:
