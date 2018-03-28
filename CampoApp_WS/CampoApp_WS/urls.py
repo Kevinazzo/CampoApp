@@ -21,6 +21,5 @@ import sitio.urls as sitiourls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-	path('sitio/', include('sitio.urls')),
-	path('kevin/', sitioviews.generarUsuario)
+	path('sitio/', include('sitio.urls'))
 ]
