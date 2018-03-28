@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 using Android.App;
 using Android.Content;
@@ -16,6 +17,10 @@ namespace CampoApp
 	public class frg_restaurants : Fragment
 	{
 		ListView listview;
+		#region results control
+		//aqui controlaremos la cantidad de resultados que obtendremos de la base de datos
+		private int pageIndex = 0; // pageIndex = pageIndex*15;
+		#endregion
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -38,11 +43,19 @@ namespace CampoApp
 			listview.Adapter = sitesAdapter;
 
 		}
+		#region viejo metodo
 		List<sitemodel> fillnewRestaurantSitelist()
 		{
 			List<sitemodel> list = new List<sitemodel>();
-			list.Add(new sitemodel("Checo's Restaurante", "Antiguo camino a potrero chico #333", "25.957405, -100.476183", new string[] { "restaurante" }));
+			list.Add(new sitemodel(	"Checo's Restaurante","Antiguo camino a potrero chico #333","25.957405, -100.476183","restaurante"));
 			return list;
+		}
+		#endregion
+		List<sitemodel> fetchResults(int page)
+		{
+			var json = MainActivity.webC.DownloadString("192.168.1.102:8000/sitio/0?cur=" + page);
+			var results = JsonConvert.DeserializeObject<List<sitemodel>>(json);
+			return results;
 		}
 	}
 }

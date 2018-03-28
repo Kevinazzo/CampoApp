@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Net;
+using Newtonsoft.Json;
 
 using Android.App;
 using Android.Content;
@@ -16,6 +18,12 @@ namespace CampoApp
 	public class frg_campingSites : Fragment
 	{
 		ListView listview;
+		#region results control
+		//aqui controlaremos la cantidad de resultados que obtendremos de la base de datos
+		private int pageIndex = 0; // pageIndex = pageIndex*15;
+		#endregion
+
+		
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -33,15 +41,28 @@ namespace CampoApp
 		public override void OnStart()
 		{
 			base.OnStart();
-			sitesAdapter sitesAdapter = new sitesAdapter(Activity, fillnewCampingSitelist());
+			sitesAdapter sitesAdapter = new sitesAdapter(Activity, fetchResults(pageIndex));
 			listview = View.FindViewById<ListView>(Resource.Id.campingsites_listview);
 			listview.Adapter = sitesAdapter;
 		}
-		List<sitemodel>fillnewCampingSitelist()
+		#region base de datos diccionario
+		//List<sitemodel>fillnewCampingSitelist()
+		//{
+		//	List<sitemodel> list = new List<sitemodel>();
+		//	list.Add(new sitemodel(
+		//		"La Posada",
+		//		"Antiguo Camino a Potrero Chico 825, Las Pedreras, 65600 Hidalgo, N.L.",
+		//		"25.956590, -100.475669",
+		//		"acampar"));
+		//	return list;
+		//}
+		#endregion
+
+		List<sitemodel> fetchResults(int page)
 		{
-			List<sitemodel> list = new List<sitemodel>();
-			list.Add(new sitemodel("La Posada", "Antiguo Camino a Potrero Chico 825, Las Pedreras, 65600 Hidalgo, N.L.", "25.956590, -100.475669", new string[] { "acampar" }));
-			return list;
+			var json = MainActivity.webC.DownloadString("192.168.1.102:8000/sitio/2?cur=" + page);
+			var results = JsonConvert.DeserializeObject<List<sitemodel>>(json);
+			return results;
 		}
 	}
 }

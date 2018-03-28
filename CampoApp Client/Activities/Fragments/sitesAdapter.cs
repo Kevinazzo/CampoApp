@@ -37,7 +37,7 @@ namespace CampoApp
 		public override View GetView(int position, View convertView, ViewGroup parent)
 		{
 			View row = null;
-			if (list[position].tagset.Contains("restaurante")) //opciones para los restaurantes
+			if (list[position].tag==("restaurante") ) //opciones para los restaurantes
 			{
 				row = context.LayoutInflater.Inflate(Resource.Layout.campingsitesfragmentlistviewelement, parent, false);
 
@@ -48,8 +48,8 @@ namespace CampoApp
 				LinearLayout textcontainer = row.FindViewById<LinearLayout>(Resource.Id.campingsitesListViewelement_textContainer);
 
 				img.SetImageResource(Resource.Drawable.restaurantMarker);
-				title.Text = list[position].nombre;
-				address.Text = list[position].direccion;
+				title.Text = list[position].name;
+				address.Text = list[position].address;
 				btn.SetImageResource(Resource.Drawable.mapmarker);
 				img.LayoutParameters.Width = MainActivity.DevicePxWidth / 5;
 				img.LayoutParameters.Height = img.LayoutParameters.Width;
@@ -63,12 +63,12 @@ namespace CampoApp
 
 				btn.Click += delegate
 				{
-					var geoUri = Android.Net.Uri.Parse("geo:" + list[position].coordenadas + "?z=20");
+					var geoUri = Android.Net.Uri.Parse("geo:" + list[position].coordinates + "?z=20");
 					var mapIntent = new Intent(Intent.ActionView, geoUri);
 					context.StartActivity(mapIntent);
 				};
 			}
-			else if(list[position].desc!=null && list[position].desc!="")// opciones para los sitios de senderismo
+			else if(list[position].description!=null && list[position].description!="")// opciones para los sitios de senderismo
 			{
 
 				row = context.LayoutInflater.Inflate(Resource.Layout.climbingsitesfragmentlistviewelement, parent, false);
@@ -77,8 +77,8 @@ namespace CampoApp
 				Button btn = row.FindViewById<Button>(Resource.Id.climbingSiteListViewElement_Btn);
 				LinearLayout  txtcontainer= row.FindViewById<LinearLayout>(Resource.Id.climbingsitesListViewelement_textContainer);
 
-				name.Text = list[position].nombre;
-				description.Text = list[position].desc;
+				name.Text = list[position].name;
+				description.Text = list[position].description;
 				//name.LayoutParameters.Width = (MainActivity.DevicePxWidth / 6) * 4;
 				//description.LayoutParameters.Width = name.LayoutParameters.Width;
 				txtcontainer.LayoutParameters.Width=(MainActivity.DevicePxWidth/6)*4;
@@ -89,7 +89,7 @@ namespace CampoApp
 					var mapIntent = new Intent(Intent.ActionView, httpUri);
 					context.StartActivity(mapIntent);
 				};
-			}else if (list[position].tagset.Contains("acampar")) //opciones para los sitiops de acampas
+			}else if (list[position].tag.Contains("acampar")) //opciones para los sitiops de acampas
 			{
 				row = context.LayoutInflater.Inflate(Resource.Layout.campingsitesfragmentlistviewelement, parent, false);
 
@@ -100,8 +100,8 @@ namespace CampoApp
 				LinearLayout textcontainer = row.FindViewById<LinearLayout>(Resource.Id.campingsitesListViewelement_textContainer);
 
 				img.SetImageResource(Resource.Drawable.restaurantMarker);
-				title.Text = list[position].nombre;
-				address.Text = list[position].direccion;
+				title.Text = list[position].name;
+				address.Text = list[position].address;
 				btn.SetImageResource(Resource.Drawable.mapmarker);
 				img.LayoutParameters.Width = MainActivity.DevicePxWidth / 5;
 				img.LayoutParameters.Height = img.LayoutParameters.Width;
@@ -115,7 +115,7 @@ namespace CampoApp
 
 				btn.Click += delegate
 				{
-					var geoUri = Android.Net.Uri.Parse("geo:" + list[position].coordenadas + "?z=20");
+					var geoUri = Android.Net.Uri.Parse("geo:" + list[position].coordinates + "?z=20");
 					var mapIntent = new Intent(Intent.ActionView, geoUri);
 					context.StartActivity(mapIntent);
 				};

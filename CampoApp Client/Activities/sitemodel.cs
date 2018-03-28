@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 using Android.App;
 using Android.Content;
@@ -14,25 +15,48 @@ namespace CampoApp
 {
 	public class sitemodel
 	{
-		public sitemodel(string nom, string dir, string coor,string[] tags)
+		public sitemodel()
 		{
-			nombre = nom;
-			direccion = dir;
-			coordenadas = coor;
-			tagset = tags;
+
+		}
+		public sitemodel(string nom, string dir, string coor,string _tag)
+		{
+			name = nom;
+			address = dir;
+			coordinates = coor;
+			tag = _tag;
 		}
 		public sitemodel(string nom, string _desc, string _web)
 		{
-			nombre = nom;
-			desc = _desc;
+			name = nom;
+			description = _desc;
 			web = _web;
 		}
-		public string nombre { get; set; }
-		public string direccion { get; set; }
-		public string coordenadas { get; set; }
-		public string web { get; set; }
-		public string desc { get; set; }
-		public string[] tagset = new string[] { "" };
+		[JsonProperty("id")]
+		public int id { get; set;}
 
+		[JsonProperty("name")]
+		public string name { get; set; }
+
+		[JsonProperty("address")]
+		public string address { get; set; }
+
+		[JsonProperty("coordinates")]
+		public string coordinates { get; set; }
+
+		[JsonProperty("web")]
+		public string web { get; set; }
+
+		[JsonProperty("description")]
+		public string description { get; set; }
+
+		[JsonProperty("tag")]
+		public string tag { get; set; }
+	}
+	public class sitemodelList
+	{
+
+		[JsonProperty("sitemodel")]
+		public sitemodel sitemodel { get; set; }
 	}
 }

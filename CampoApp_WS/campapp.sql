@@ -4,10 +4,10 @@ use campApp;
 
 create table site(
 id int not null auto_increment primary key,
-Name varchar(100) not null,
-Description text ,
-Coordinates varchar(100),
-Address varchar(100),
+name varchar(100) not null,
+description text ,
+coordinates varchar(100),
+address varchar(100),
 web text,
 tag enum('restaurante','senderismo','camping')
 );

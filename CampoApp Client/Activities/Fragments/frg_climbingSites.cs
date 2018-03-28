@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 using Android.App;
 using Android.Content;
@@ -16,6 +17,10 @@ namespace CampoApp
 	public class frg_climbingSites : Fragment
 	{
 		ListView listview;
+		#region results control
+		//aqui controlaremos la cantidad de resultados que obtendremos de la base de datos
+		private int pageIndex = 0; // pageIndex = pageIndex*15;
+		#endregion
 		public override void OnCreate(Bundle savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
@@ -37,6 +42,7 @@ namespace CampoApp
 			listview = View.FindViewById<ListView>(Resource.Id.climbingSites_listiview);
 			listview.Adapter = sitesAdapter;
 		}
+		#region
 		List<sitemodel> fillNewClimbingSiteList()
 		{
 			List<sitemodel> list = new List<sitemodel>();
@@ -48,6 +54,13 @@ namespace CampoApp
 			list.Add(new sitemodel("Aguja Inferior", "53,86 km, de La Azufrosa, Coahuila, Bicicleta", "https://es.wikiloc.com/rutas-senderismo/aguja-inferior-en-mina-nl-bici-desde-termas-de-san-joaquin-16386361"));
 			list.Add(new sitemodel("El Penitente", "7,78 km, Sierra Hermosa, Coahuila", "https://es.wikiloc.com/rutas-senderismo/el-penitente-desde-sierra-hermosa-arteaga-n-l-18560007"));
 			return list;
+		}
+		#endregion
+		List<sitemodel> fetchResults(int page)
+		{
+			var json = MainActivity.webC.DownloadString("192.168.1.102:8000/sitio/1?cur=" + page);
+			var results = JsonConvert.DeserializeObject<List<sitemodel>>(json);
+			return results;
 		}
 	}
 }
