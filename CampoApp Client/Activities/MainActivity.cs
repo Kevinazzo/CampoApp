@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Widget;
 using Android.Views;
+using Android.Content;
 using Android.Content.PM;
 using Android.Content.Res;
 using Android.OS;
@@ -64,15 +65,34 @@ namespace CampoApp
 				{
 					case Resource.Id.nav_campSites:
 						SupportActionBar.Title = "CampApp - Sitios de Acampar";
+						logo_container.SetImageResource(0);
 						fragment = new frg_campingSites();
 						break;
 					case Resource.Id.nav_climbSites:
 						SupportActionBar.Title = "CampApp - Rutas de escalada";
+						logo_container.SetImageResource(0);
 						fragment = new frg_climbingSites();
 						break;
 					case Resource.Id.nav_Restaurants:
 						SupportActionBar.Title = "CampApp - Restaurantes";
+						logo_container.SetImageResource(0);
 						fragment = new frg_restaurants();
+						break;
+					case Resource.Id.nav_uber:
+						try
+						{
+							var uri = Android.Net.Uri.Parse("market://details?id=com.ubercab");
+							Intent intent = new Intent(Intent.ActionView, uri);
+							intent.AddFlags(ActivityFlags.NewTask);
+							BaseContext.StartActivity(intent);
+						}
+						catch (System.Exception)
+						{
+							var uri = Android.Net.Uri.Parse("https://play.google.com/store/apps/details?id=com.ubercab");
+							Intent intent = new Intent(Intent.ActionView, uri);
+							intent.AddFlags(ActivityFlags.NewTask);
+							BaseContext.StartActivity(intent);
+						}
 						break;
 					default:
 						Toast.MakeText(this, "No hay aplicacion de uber", ToastLength.Short).Show();

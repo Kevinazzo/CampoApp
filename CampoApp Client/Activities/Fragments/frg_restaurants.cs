@@ -55,7 +55,16 @@ namespace CampoApp
 		#endregion
 		List<sitemodel> fetchResults(int page)
 		{
-			var json = MainActivity.webC.DownloadString("http://10.0.2.2:8000/sitio/restaurante/cur=" + page);
+			string json;
+			try
+			{
+				json = MainActivity.webC.DownloadString("http://10.0.2.2:8000/sitio/restaurante/cur=" + page);
+			}
+			catch (Exception)
+			{
+				json = MainActivity.webC.DownloadString("http://192.168.1.102:8000/sitio/restaurante/cur=" + page);
+			}
+			
 			var results = JsonConvert.DeserializeObject<List<sitemodel>>(json);
 			return results;
 		}

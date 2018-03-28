@@ -89,7 +89,7 @@ namespace CampoApp
 					var mapIntent = new Intent(Intent.ActionView, httpUri);
 					context.StartActivity(mapIntent);
 				};
-			}else if (list[position].tag.Contains("camping")) //opciones para los sitiops de acampas
+			}else if (list[position].tag.Contains("camping")) //opciones para los sitiops de camping
 			{
 				row = context.LayoutInflater.Inflate(Resource.Layout.campingsitesfragmentlistviewelement, parent, false);
 
@@ -99,7 +99,7 @@ namespace CampoApp
 				ImageButton btn = row.FindViewById<ImageButton>(Resource.Id.campingSiteListViewElement_imgBtn);
 				LinearLayout textcontainer = row.FindViewById<LinearLayout>(Resource.Id.campingsitesListViewelement_textContainer);
 
-				img.SetImageResource(Resource.Drawable.restaurantMarker);
+				img.SetImageResource(Resource.Drawable.campingtent);
 				title.Text = list[position].name;
 				address.Text = list[position].address;
 				btn.SetImageResource(Resource.Drawable.mapmarker);
