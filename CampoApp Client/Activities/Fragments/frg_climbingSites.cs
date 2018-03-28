@@ -38,7 +38,7 @@ namespace CampoApp
 		public override void OnStart()
 		{
 			base.OnStart();
-			sitesAdapter sitesAdapter = new sitesAdapter(Activity, fillNewClimbingSiteList());
+			sitesAdapter sitesAdapter = new sitesAdapter(Activity, fetchResults(pageIndex));
 			listview = View.FindViewById<ListView>(Resource.Id.climbingSites_listiview);
 			listview.Adapter = sitesAdapter;
 		}
@@ -58,7 +58,7 @@ namespace CampoApp
 		#endregion
 		List<sitemodel> fetchResults(int page)
 		{
-			var json = MainActivity.webC.DownloadString("192.168.1.102:8000/sitio/1?cur=" + page);
+			var json = MainActivity.webC.DownloadString("http://10.0.2.2:8000/sitio/senderismo/cur=" + page);
 			var results = JsonConvert.DeserializeObject<List<sitemodel>>(json);
 			return results;
 		}

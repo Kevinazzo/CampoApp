@@ -60,7 +60,7 @@ namespace CampoApp
 
 		List<sitemodel> fetchResults(int page)
 		{
-			var json = MainActivity.webC.DownloadString("192.168.1.102:8000/sitio/2?cur=" + page);
+			var json = MainActivity.webC.DownloadString("http://10.0.2.2:8000/sitio/camping/cur=" + page);
 			var results = JsonConvert.DeserializeObject<List<sitemodel>>(json);
 			return results;
 		}

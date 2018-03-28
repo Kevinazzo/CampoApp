@@ -11,6 +11,7 @@ using Android.Support.V7.App;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 using System.Net;
 
+
 namespace CampoApp
 {
 	[Activity(Label = "CampApp", MainLauncher = true, Theme = "@style/CampoTheme")]
@@ -27,6 +28,7 @@ namespace CampoApp
 		public static int DevicePxHeight { get; set; }
 		public static int DevicePxWidth { get; set; }
 		public static WebClient webC = new WebClient();
+
 
 
 		protected override void OnCreate(Bundle savedInstanceState)

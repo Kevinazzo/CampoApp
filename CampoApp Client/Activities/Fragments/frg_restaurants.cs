@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
+
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -17,6 +18,7 @@ namespace CampoApp
 	public class frg_restaurants : Fragment
 	{
 		ListView listview;
+
 		#region results control
 		//aqui controlaremos la cantidad de resultados que obtendremos de la base de datos
 		private int pageIndex = 0; // pageIndex = pageIndex*15;
@@ -38,7 +40,7 @@ namespace CampoApp
 		public override void OnStart()
 		{
 			base.OnStart();
-			sitesAdapter sitesAdapter = new sitesAdapter(Activity, fillnewRestaurantSitelist());
+			sitesAdapter sitesAdapter = new sitesAdapter(Activity, fetchResults(pageIndex));
 			listview = View.FindViewById<ListView>(Resource.Id.campingsites_listview);
 			listview.Adapter = sitesAdapter;
 
@@ -53,7 +55,7 @@ namespace CampoApp
 		#endregion
 		List<sitemodel> fetchResults(int page)
 		{
-			var json = MainActivity.webC.DownloadString("192.168.1.102:8000/sitio/0?cur=" + page);
+			var json = MainActivity.webC.DownloadString("http://10.0.2.2:8000/sitio/restaurante/cur=" + page);
 			var results = JsonConvert.DeserializeObject<List<sitemodel>>(json);
 			return results;
 		}

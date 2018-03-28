@@ -89,7 +89,7 @@ namespace CampoApp
 					var mapIntent = new Intent(Intent.ActionView, httpUri);
 					context.StartActivity(mapIntent);
 				};
-			}else if (list[position].tag.Contains("acampar")) //opciones para los sitiops de acampas
+			}else if (list[position].tag.Contains("camping")) //opciones para los sitiops de acampas
 			{
 				row = context.LayoutInflater.Inflate(Resource.Layout.campingsitesfragmentlistviewelement, parent, false);
 

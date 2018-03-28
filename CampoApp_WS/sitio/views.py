@@ -10,13 +10,14 @@ from . import ORM as rr
 
  
 # Create your views here
-cnx = Connection(port=3307,user='user16', password='123456', host='mysql8.db4free.net', database='campapp')
+#cnx = Connection(port=3307,user='user16', password='123456', host='mysql8.db4free.net', database='campapp')
+cnx = Connection(port=3306,user='root', password='1234', host='localhost', database='campapp')
 cur = cnx.cursor(DictCursor)
 
 @api_view(['GET'])
 @renderer_classes((JSONRenderer,))
 def getSitio(request, _type,_index,format=None):
-	cur.execute("select * from site where tag ="+_type.__str__()+" LIMIT "+(_index*15).__str__()+", 15;")
+	cur.execute("select * from site where tag ='"+_type.__str__()+"' LIMIT "+(_index*15).__str__()+", 15;")
 	data= cur.fetchall()
 	#metodo viejo usando ORM
 #	for item in data:
